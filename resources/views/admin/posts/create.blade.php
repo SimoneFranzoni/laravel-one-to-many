@@ -2,42 +2,45 @@
 
 @section('content')
 <div class="container">
-    <h1>Nuovo post</h1>
 
-    @if ($errors -> any())
+  <div class="row">
+    <div class="col-10 offset-1">
+      @if ($errors->any())
         <div class="alert alert-danger" role="alert">
-            <ul>
-                @foreach ($errors -> all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>    
-    @endif
-    
-    <form action="{{ route('admin.posts.store') }}" method="POST">
+            <p> Compilare i campi obbligatori </p>
+        </div>
+      @endif
+      <form action=" {{ route('admin.posts.store') }} " method="POST">
         @csrf
-        @method('POST')
         <div class="mb-3">
-            <label for="title" class="form-label">Titolo</label>
-            <input value="{{ old('title')}}" type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Titolo">
-            @error('title')
-                <p>{{ $message }}</p>
-            @enderror
+          <label for="title" class="form-label">Titolo</label>
+          <input type="text" class="form-control @error('title') is-invalid @enderror" value=" {{ old('title') }} "  name="title" id="title">
         </div>
         <div class="mb-3">
-            <label for="content" class="form-label">Testo</label>
-            <textarea class="form-control @error('title') is-invalid @enderror" id="content" name="content" rows="3">{{ old('content')}}</textarea>
-            @error('content')
-                <p>{{ $message }}</p>
-            @enderror
+          <label for="content" class="form-label">Content</label>
+          <textarea type="text" class="form-control @error('content') is-invalid @enderror" value=" {{ old('content') }} " name="content" id="content"> </textarea>
         </div>
-        {{--Invia i dati allo store--}}
-        <button type="submit" class="btn btn-success">Invia</button>
-        <button type="reset" class="btn btn-secondary">Reset</button>
-    </form>
-</div>
-@endsection
+        <div>
 
-@section('title')
-    | Nuovo Post
+          <select name="category_id" id="category_id" class="form-control" aria-label="Default select example">
+            <option>Scegli una categoria</option>
+
+            @foreach ($categories as $category)      
+              <option @if($category->id == old('category_id') ) selected @endif
+               value=" {{ $category->id }} "> {{ $category->name }} </option>
+            @endforeach
+        
+          </select>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary m-2">Salva</button>
+        <button type="reset" class="btn btn-warning m-2">Reset</button>
+      </form>
+    </div>
+  </div>
+   
+
+
+</div>
 @endsection

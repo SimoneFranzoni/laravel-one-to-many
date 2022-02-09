@@ -14,14 +14,12 @@
                         </div>
                     @endif
 
-                    Ciao {{ Auth::user()->name }}
+                    {{ __('You are logged in!') }}
+
+                    <h2> PAGINA ADMIN</h2>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
-
-@section('title')
-    | Home
 @endsection

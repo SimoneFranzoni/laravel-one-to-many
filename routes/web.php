@@ -20,14 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware('auth')
-    ->namespace('Admin')
-    ->name('admin.')
-    ->prefix('admin')
-    ->group(function(){
-        Route::get('/', 'HomeController@index') -> name('index'); 
+  ->namespace('Admin')
+  ->name('admin.')
+  ->prefix('admin')
+  ->group(function(){
+       Route::get('/', 'HomeController@index')->name('index');
 
-        // rotte protette da password
-        Route::resource('/posts','PostsController');
-    });
-
-
+       Route::resource('/posts', 'PostController');
+  });
